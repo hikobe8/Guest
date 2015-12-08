@@ -11,20 +11,40 @@
 #register dl{
 	width: 400px;
 	margin: 0 auto;
-	background: red;
 }
 #register dl dt{
-	padding: 10px 0;
+	padding: 10px 0 10px 0;
 	text-align: center;
 	font-weight: bold;
 }
 #register dl dd{
-	padding: 5px 0;
+	height:30px;
+	padding:0px;
+	margin: 0 0 0 30px;
 }
-
+#register dl dd.face{
+	width: 80px;
+	height: 80px;
+	margin:0 0 5px 0;
+	padding:0 0 0 140px;
+}
+#register dl dd.face img{
+	cursor:pointer;
+}
 #register dl dd input.text{
 	width: 220px;
 	height: 19px;
 	border: 1px dashed #ccc;
 	background: #fff;
+}
+#register dl dd input.text_yzm{
+	width: 60px;
+}
+#register dl dd input.submit{
+	width: 60px;
+	height: 19px;
+	border: 1px dashed #ccc;
+	background: #fff;
+	cursor: pointer;
+	margin: 40px 0 0 110px;
 }

@@ -20,18 +20,19 @@ require ROOT_PATH . "includes/header.inc.php";
 	<h2>用户注册</h2>
 	<form method="post" action="post.php">
 	<dl>
-	 <dt>请认真填写以下信息</dt>
-	 <dd>用 户 名:<input type="text" name="username" class="text"/></dd>
-	 <dd>密　　码:<input type="password" name="password" class="text"/></dd>
-	 <dd>确认密码:<input type="password" name="notpassword"class="text"/></dd>
-	 <dd>密码提示:<input type="text" name="passt" class="text"/></dd>
-	 <dd>密码回答:<input type="text" name="passd" class="text"/></dd>
-	 <dd>性　　别:<input type="radio" name="sex" value="男" checked="checked"/>男<input type="radio" name="sex" value="女"/>女</dd>	
-	 <dd><img src="face/m01.gif" alt="头像选择"></dd>
-	 <dd>电子邮件:<input type="text" name="email"class="text"/></dd>
-	 <dd>　　QQ　:<input type="text" name="qq"class="text"/></dd>
-	 <dd>主页地址:<input type="text" name="url" value="http://"class="text"/></dd>
-	 <dd>验 证 码:<input type="text" name="yzm"class="text yzm"/></dd>
+		<dt>请认真填写以下信息</dt>
+	 	<dd>用 户 名：<input type="text" name="username" class="text"/></dd>
+	 	<dd>密　　码: <input type="password" name="password" class="text"/></dd>
+	 	<dd>确认密码: <input type="password" name="notpassword"class="text"/></dd>
+	 	<dd>密码提示: <input type="text" name="passt" class="text"/></dd>
+	 	<dd>密码回答: <input type="text" name="passd" class="text"/></dd>
+	 	<dd>性　　别: <input type="radio" name="sex" value="男" checked="checked"/>男<input type="radio" name="sex" value="女"/>女</dd>	
+	 	<dd class='face'><img src="face/m01.gif" alt="头像选择" onclick="javascript:window.open('face.php','face','width=400, height=400, top=0, left=0')"></dd>
+	 	<dd>电子邮件: <input type="text" name="email"class="text"/></dd>
+	 	<dd>　QQ　： <input type="text" name="qq"class="text"/></dd>
+	 	<dd>主页地址: <input type="text" name="url" value="http://"class="text"/></dd>
+	 	<dd>验 证 码： <input type="text" name="yzm" class="text_yzm"/></dd>
+	 	<dd><input type="submit" name="register" value="注册" class="submit"></dd>
 	</dl>
 	</form>
 </div>
