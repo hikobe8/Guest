@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 *{
-	margin: 0px;
+	margin: 20px 0;;
 	padding: 0px;
 }
 body{
@@ -45,11 +45,20 @@ h2{
 #header ul li{
 	display: inline;
 }
+#header ul li a{
+	text-decoration:none;
+	color:#333;
+}
+#header ul li a:hover{
+	text-decoration:underline;
+	color:blue;
+}
 #footer{
 	clear: both;
 	width: auto;
 	height: 60px;
 	text-align: center;
+	margin: 10px 0;
 }
 #footer p{
 	font-size: 12px;

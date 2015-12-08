@@ -8,7 +8,6 @@
  * Author: hikobe8
  * Date: 2015-12-7
 */
-
 // 定义防止恶意调用使用的常量,供子页面检查
 define ( "IN_TG", true );
 //引入公共文件
@@ -41,6 +40,6 @@ require dirname(__FILE__).'/includes/common.inc.php';
 	<?php
 	require ROOT_PATH."includes/footer.inc.php";
 	//require 'includes/footer.inc.php';
-	?>>
+	?>
 </body>
 </html>

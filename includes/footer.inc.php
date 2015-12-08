@@ -14,6 +14,7 @@ if (! defined ( 'IN_TG' )) {
 }
 ?>
 <div id="footer">
+	<p>本页面执行耗时:<?php echo round(_runtime() - START_TIME, 4)?>秒</p>
 	<p>版权所有 翻版必究!</p>
 	<p>
 		本程序由<span>瓢城Web俱乐部提供</span>，可以任意修改或发布(c) hikobe@163.com
