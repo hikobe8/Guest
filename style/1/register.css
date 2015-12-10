@@ -39,6 +39,9 @@
 }
 #register dl dd input.text_yzm{
 	width: 60px;
+	height: 19px;
+	border: 1px dashed #ccc;
+	background: #fff;
 }
 #register dl dd input.submit{
 	width: 60px;
