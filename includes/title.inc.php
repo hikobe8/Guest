@@ -10,6 +10,10 @@
 */
 // 定义防止恶意调用使用的常量
 define ( "IN_TG", true );
+//防止非html页面调用
+if (!defined ( 'SCRIPT' )) {
+	exit ( "Script error!" );
+}
 
 ?>
 <link rel="stylesheet" type="text/css" href="style/1/basic.css" />
