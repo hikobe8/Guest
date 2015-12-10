@@ -8,8 +8,7 @@
  * Author: hikobe8
  * Date: 2015-12-9
 */
-// 定义防止恶意调用使用的常量
-define ( "IN_TG", true );
+define('IN_TG', true);
 // 定义调用样式的常量
 define ( "SCRIPT", 'face' );
 // 引入公共文件

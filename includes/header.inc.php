@@ -8,7 +8,7 @@
  * Author: hikobe8
  * Date: 2015-12-7
 */
-// 使用判断index定义的常量，防止恶意调用
+// 使用判断index页面定义的常量，防止恶意调用
 if (! defined ( 'IN_TG' )) {
 	exit ( "Access Denied!" );
 }

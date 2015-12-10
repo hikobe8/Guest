@@ -11,8 +11,10 @@ require dirname ( __FILE__ ) . '/includes/common.inc.php';
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>多用户留言系统--注册</title>
-<?php require ROOT_PATH.'includes/title.inc.php';?>
+<?php require ROOT_PATH.'includes/title.inc.php';
+?>
 <script type="text/javascript" src="js/face.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
 </head>
 <body>
 <?php
@@ -33,7 +35,7 @@ require ROOT_PATH . "includes/header.inc.php";
 	 	<dd>电子邮件: <input type="text" name="email"class="text"/></dd>
 	 	<dd>　QQ　　: <input type="text" name="qq"class="text"/></dd>
 	 	<dd>主页地址: <input type="text" name="url" value="http://" class="text"/></dd>
-	 	<dd>验 证 码：<input type="text" name="yzm" class="text_yzm"/></dd>
+	 	<dd>验 证 码：<input type="text" name="yzm" class="text_yzm"/><img src="authcode.php" id="code"/></dd>
 	 	<dd><input type="submit" name="register" value="注册" class="submit"></dd>
 	</dl>
 	</form>
