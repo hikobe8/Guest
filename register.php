@@ -3,8 +3,22 @@
 define ( "IN_TG", true );
 //定义调用样式的常量
 define("SCRIPT", 'register');
+//打开session
+session_start();
 // 引入公共文件
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
+//判断是否是表单正常为提交
+if(($_GET['action'] == 'register')){
+    //检查验证码
+    _checkcode($_POST['code'],$_SESSION['code']);
+    //引入注册检查过滤的函数库
+    include ROOT_PATH.'includes/check.func.php';
+    //用一个数组保存表单提交个数据
+    $clean = array();
+    //将通过验证的姓名赋值到数组中
+    $clean['username'] = _check_username($_POST['username'], 2, 20);
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -22,7 +36,7 @@ require ROOT_PATH . "includes/header.inc.php";
 ?>
 <div id="register">
 	<h2>用户注册</h2>
-	<form method="post" name="registerform" action="post.php">
+	<form method="post" name="registerform" action="register.php?action=register">
 	<dl>
 		<dt>请认真填写以下信息</dt>
 	 	<dd>用 户 名：<input type="text" name="username" class="text"/>(*必填，至少两位)</dd>
@@ -35,7 +49,7 @@ require ROOT_PATH . "includes/header.inc.php";
 	 	<dd>电子邮件: <input type="text" name="email"class="text"/></dd>
 	 	<dd>　QQ　　: <input type="text" name="qq"class="text"/></dd>
 	 	<dd>主页地址: <input type="text" name="url" value="http://" class="text"/></dd>
-	 	<dd>验 证 码：<input type="text" name="yzm" class="text_yzm"/><img src="authcode.php" id="code"/></dd>
+	 	<dd>验 证 码：<input type="text" name="code" class="text_yzm"/><img src="authcode.php" id="code"/></dd>
 	 	<dd><input type="submit" name="register" value="注册" class="submit"></dd>
 	</dl>
 	</form>

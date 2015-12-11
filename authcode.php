@@ -10,6 +10,7 @@
  */
 define('IN_TG', true);
 header("Content-Type:image/png");
+session_start();
 // 引入公共文件
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
 _code();
