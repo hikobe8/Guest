@@ -12,6 +12,8 @@
 if (!defined('IN_TG')) {
 	exit('Access Denied!');
 }
+//设置字符集编码
+header('Content-Type: text/html; charset=utf-8');
 /*
  * 拒绝低版本，版本太低可能功能实现不了
  */

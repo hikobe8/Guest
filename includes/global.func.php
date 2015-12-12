@@ -10,6 +10,16 @@
 	}
 	
 	/**
+	 * 调用js 弹窗 
+	 * @access public
+	 * @param string $info 提示信息
+	 */
+	function _alert_back($info){
+		echo "<script>alert('$info');history.back()</script>";
+		exit();
+	}
+	
+	/**
 	 * _code() 调用生成一张验证码图片
 	 * @access public
 	 * @param number $width 图片宽度
