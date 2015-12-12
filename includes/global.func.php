@@ -8,15 +8,26 @@
 		$time = explode(' ',microtime());
 		return $time[1] + $time[0];
 	}
-	
 	/**
-	 * 调用js 弹窗 
-	 * @access public
+	 * 调用js弹出提示框
 	 * @param string $info 提示信息
 	 */
 	function _alert_back($info){
-		echo "<script>alert('$info');history.back()</script>";
-		exit();
+	    echo "<script>alert('$info'),history.back();</script>";
+	    exit();
+	}
+	
+
+	/**
+	 * 比较输入验证码是否相等
+	 * @access public
+	 * @param string $code1  输入的验证码
+	 * @param string $code2  生成的验证码
+	 */
+	function _checkcode($code1, $code2) {   
+	    if(!($code1 == $code2)) {
+	        _alert_back("验证码输入错误，请重新输入!");
+	    }
 	}
 	
 	/**
@@ -29,8 +40,6 @@
 	 * @return 打印一张验证码图片
 	 */
 	function _code($width = 75, $height = 25, $code_count = 4 , $border = false){
-	    session_start();
-	    $_SESSION['code'] = '';
 	    for($i = 0; $i < $code_count; $i ++) {
 	        $code .= dechex(mt_rand(0, 15));
 	    }

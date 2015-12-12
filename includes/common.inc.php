@@ -8,6 +8,8 @@
  * Author: hikobe8
  * Date: 2015-12-7
 */
+//设置字符编码
+header("Content-Type:text/html;charset=utf-8");
 //防止恶意调用
 if (!defined('IN_TG')) {
 	exit('Access Denied!');

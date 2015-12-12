@@ -3,26 +3,21 @@
 define ( "IN_TG", true );
 //定义调用样式的常量
 define("SCRIPT", 'register');
+//打开session
+session_start();
 // 引入公共文件
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
-//判断表单是否提交
-if($_GET['action'] != 'register') {
-	exit("非法提交!");
+
+if(($_GET['action'] == 'register')){
+    //检查验证码
+    _checkcode($_POST['code'],$_SESSION['code']);
+    //引入注册检查过滤的函数库
+    include ROOT_PATH.'includes/check.func.php';
+    //用一个数组保存表单提交个数据
+    $clean = array();
+    //将通过验证的姓名赋值到数组中
+    $clean['username'] = _check_username($_POST['username'], 2, 20);
 }
-session_start();
-//检查验证码
-$authcode = $_POST['code'];
-if(!($_SESSION['code'] == $authcode)) {
-	_alert_back('验证码错误，请重新输入！');
-}
-$userinfo = array();
-$userinfo['username'] = $_POST['username'];
-$userinfo['password'] = $_POST['password'];
-$userinfo['notepassword'] = $_POST['notepassword'];
-$userinfo['passt'] = $_POST['passt'];
-$userinfo['passd'] = $_POST['passd'];
-$userinfo['username'] = $_POST['username'];
-print_r($userinfo);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
