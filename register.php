@@ -10,13 +10,18 @@ require dirname ( __FILE__ ) . '/includes/common.inc.php';
 
 if(($_GET['action'] == 'register')){
     //检查验证码
-    _checkcode($_POST['code'],$_SESSION['code']);
+//    _checkcode($_POST['code'],$_SESSION['code']);
     //引入注册检查过滤的函数库
-    include ROOT_PATH.'includes/check.func.php';
+    include ROOT_PATH.'includes/register.func.php';
     //用一个数组保存表单提交个数据
     $clean = array();
     //将通过验证的姓名赋值到数组中
-    $clean['username'] = _check_username($_POST['username'], 2, 20);
+//    $clean['username'] = _check_username($_POST['username'], 2, 20);
+//    $clean['password'] = _check_password($_POST['password'], $_POST['notpassword'], 6);
+//    $clean['passt'] = _check_pwd_question($_POST['passt'], 2, 8);
+//    $clean['passd'] = _check_pwd_answer($_POST['passt'], $_POST['passd'], 2, 8);
+    $clean['email'] = _check_email($_POST['email']);
+    print_r($clean);
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -40,7 +45,7 @@ require ROOT_PATH . "includes/header.inc.php";
 		<dt>请认真填写以下信息</dt>
 	 	<dd>用 户 名：<input type="text" name="username" class="text"/>(*必填，至少两位)</dd>
 	 	<dd>密　　码: <input type="password" name="password" class="text"/>(*必填，至少六位)</dd>
-	 	<dd>确认密码: <input type="password" name="notepassword"class="text"/>(*必填，同上)</dd>
+	 	<dd>确认密码: <input type="password" name="notpassword"class="text"/>(*必填，同上)</dd>
 	 	<dd>密码提示: <input type="text" name="passt" class="text"/>(*必填，至少两位)</dd>
 	 	<dd>密码回答: <input type="text" name="passd" class="text"/>(*必填，至少两位)</dd>
 	 	<dd>性　　别: <input type="radio" name="sex" value="男" checked="checked"/>男<input type="radio" name="sex" value="女"/>女</dd>	
