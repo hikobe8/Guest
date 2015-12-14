@@ -108,8 +108,43 @@ function _check_email($email) {
     }
     //hikobe@163.com
     if(!preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $email)){
-        _alert_back("邮件地址不合法!");
+        _alert_back("请输入正确的邮件地址!");
     }
     return mysql_real_escape_string($email);
+}
+
+/**
+ * _check_qq 检查qq是否输入正确
+ * @access public
+ * @param string $qq qq号码
+ * @return string 正确的qq号 或者null
+ */
+function _check_qq($qq){
+    if(empty($qq)){
+        return null;
+    }
+    //794891323 
+    $mode = '/^[1-9]{1}[\d]{5,9}$/';
+    if(!preg_match($mode, $qq)){
+        _alert_back("请输入正确的QQ号!");
+    }
+    return $qq;
+}
+
+/**
+ * _check_url 检查输入的个人主页是否合法
+ * @access public
+ * @param string $url
+ * @return string 合法的主页地址或null
+ */
+function _check_url($url){
+    if(empty($url)){
+        return null;
+    }
+    $mode = '/^https?:\/\/(\w+\.)?[\w\-\.]+(\.\w+)+$/';
+    if(!preg_match($mode, $url)){
+        _alert_back("请输入正确的个人主页!");
+    }
+    return $url;
 }
 ?>
