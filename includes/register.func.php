@@ -90,6 +90,7 @@ function _check_password($pwd1,$pwd2,$minsize) {
  * @return string 过滤后的密码提示
  */
 function _check_pwd_question($question,$minsize,$maxsize) {
+    $question = trim($question);
     if(mb_strlen($question,'utf-8') < $minsize || mb_strlen($question,'utf-8') > $maxsize) {
         _alert_back("密码提示必须为".$minsize.'到'.$maxsize.'位');
     }
@@ -105,6 +106,8 @@ function _check_pwd_question($question,$minsize,$maxsize) {
  * @return string 加密的密码提示
  */
 function _check_pwd_answer($question, $answer, $minsize, $maxsize) {
+    $question = trim($question);
+    $answer = trim($answer);
     if(mb_strlen($answer,'utf-8') < $minsize || mb_strlen($answer,'utf-8') > $maxsize) {
         _alert_back("密码回答必须为".$minsize.'到'.$maxsize.'位');
     }
@@ -120,13 +123,16 @@ function _check_pwd_answer($question, $answer, $minsize, $maxsize) {
  * @param string $email 邮件地址
  * @return 合法的邮件地址 / 空值
  */
-function _check_email($email) {
+function _check_email($email,$_min_num, $_max_num) {
     if(empty($email)){
         return null;
     }
     //hikobe@163.com
     if(!preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $email)){
         _alert_back("请输入正确的邮件地址!");
+    }
+    if (strlen($email) < $_min_num || strlen($eamil) > $_max_num) {
+        _alert_back('邮件长度不合法！');
     }
     return _mysql_string($email);
 }

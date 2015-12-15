@@ -20,11 +20,11 @@ if(($_GET['action'] == 'register')){
     $clean['uniqid'] = _check_uniqid($_POST['uniqid'], $_SESSION['uniqid']);
     $clean['username'] = _check_username($_POST['username'], 2, 20);
     $clean['password'] = _check_password($_POST['password'], $_POST['notpassword'], 6);
-    $clean['sex'] = $_POST['sex'];
+    $clean['sex'] = _mysql_string($_POST['sex']);
     $clean['facesrc'] = _mysql_string($_POST['facesrc']);
     $clean['passt'] = _check_pwd_question($_POST['passt'], 2, 8);
     $clean['passd'] = _check_pwd_answer($_POST['passt'], $_POST['passd'], 2, 8);
-    $clean['email'] = _check_email($_POST['email']);
+    $clean['email'] = _check_email($_POST['email'],6,40);
     $clean['qq'] = _check_qq($_POST['qq']);
     $clean['url'] = _check_url($_POST['url']);
     print_r($clean);
