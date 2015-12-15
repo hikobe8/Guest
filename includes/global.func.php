@@ -1,4 +1,29 @@
 <?php
+    /**
+     * _mysql_string 返回一个mysql的转义字符串 提高写入数据库的安全性
+     * @access public 
+     * @param string $str 需要转义的字符串
+     * @return string 转义后的字符串
+     */
+    function _mysql_string($str) {
+        if(!GPC) {
+            return mysql_real_escape_string($str);
+        }
+        return $str;
+    }
+    
+    /**
+     * 比较输入验证码是否相等
+     * @access public
+     * @param string $code1  输入的验证码
+     * @param string $code2  生成的验证码
+     */
+    function _checkcode($code1, $code2) {
+        if(!($code1 == $code2)) {
+            _alert_back("验证码输入错误，请重新输入!");
+        }
+    }
+    
 	/**
 	 * 获取执行耗时
 	 * @access public
@@ -15,19 +40,6 @@
 	function _alert_back($info){
 	    echo "<script>alert('$info'),history.back();</script>";
 	    exit();
-	}
-	
-
-	/**
-	 * 比较输入验证码是否相等
-	 * @access public
-	 * @param string $code1  输入的验证码
-	 * @param string $code2  生成的验证码
-	 */
-	function _checkcode($code1, $code2) {   
-	    if(!($code1 == $code2)) {
-	        _alert_back("验证码输入错误，请重新输入!");
-	    }
 	}
 	
 	/**

@@ -16,6 +16,8 @@ if (!defined('IN_TG')) {
 }
 //设置字符集编码
 header('Content-Type: text/html; charset=utf-8');
+//定义当前PHP版本的表单自动转义标识符 true 自动转义 false 否
+define('GPC', get_magic_quotes_gpc());
 /*
  * 拒绝低版本，版本太低可能功能实现不了
  */

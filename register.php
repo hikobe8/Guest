@@ -10,7 +10,7 @@ require dirname ( __FILE__ ) . '/includes/common.inc.php';
 
 if(($_GET['action'] == 'register')){
     //检查验证码
-   _checkcode($_POST['code'],$_SESSION['code']);
+    _checkcode($_POST['code'],$_SESSION['code']);
     //引入注册检查过滤的函数库
     include ROOT_PATH.'includes/register.func.php';
     //用一个数组保存表单提交个数据
@@ -18,6 +18,8 @@ if(($_GET['action'] == 'register')){
     //将通过验证的姓名赋值到数组中
     $clean['username'] = _check_username($_POST['username'], 2, 20);
     $clean['password'] = _check_password($_POST['password'], $_POST['notpassword'], 6);
+    $clean['sex'] = $_POST['sex'];
+    $clean['facesrc'] = _mysql_string($_POST['facesrc']);
     $clean['passt'] = _check_pwd_question($_POST['passt'], 2, 8);
     $clean['passd'] = _check_pwd_answer($_POST['passt'], $_POST['passd'], 2, 8);
     $clean['email'] = _check_email($_POST['email']);
@@ -33,8 +35,8 @@ if(($_GET['action'] == 'register')){
 <title>多用户留言系统--注册</title>
 <?php require ROOT_PATH.'includes/title.inc.php';
 ?>
-<script type="text/javascript" src="js/face.js"></script>
 <script type="text/javascript" src="js/code.js"></script>
+<script type="text/javascript" src="js/face.js"></script>
 </head>
 <body>
 <?php

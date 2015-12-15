@@ -16,6 +16,10 @@ if (!defined('IN_TG')) {
 if(!function_exists("_alert_back")){
     exit("_alert_back()函数不存在,请检查!");
 }
+if(!function_exists("_mysql_string")){
+    exit("_mysql_string()函数不存在,请检查!");
+}
+
 /**
  * 检查一个用户名是否符合规则
  * @param unknown $name 用户名
@@ -26,9 +30,9 @@ if(!function_exists("_alert_back")){
 function _check_username($name,$minsize,$maxsize) {
     $tname = trim($name);
     if(mb_strlen($tname,'utf-8') < $minsize || mb_strlen($tname,'utf-8') > $maxsize) {
-        _alert_back("用户名长度必须为".$minsieze.'到'.$maxsize.'位');
+        _alert_back("用户名长度必须为".$minsize.'到'.$maxsize.'位');
     }
-    $pattern = "/[<>\'\"\*\ \　]/";
+    $pattern = "/[<>\'\"\s]/";
     if(preg_match($pattern, $tname)){
         _alert_back("用户名不得包含特殊字符!");
     }
@@ -43,7 +47,7 @@ function _check_username($name,$minsize,$maxsize) {
         _alert_back("不得注册以下敏感用户名:".$names);
     }
     //使用mysql转义当前字符串 防止sql注入攻击
-    return mysql_real_escape_string($tname);
+    return _mysql_string($tname);
 }
 
 /**
@@ -61,7 +65,7 @@ function _check_password($pwd1,$pwd2,$minsize) {
     if($pwd1 != $pwd2){
         _alert_back("密码和确认密码不一致!");
     }
-    return sha1($pwd1);
+    return _mysql_string(sha1($pwd1));
 }
 /**
  * _check_pwd_question()检查密码提示是否输入正确
@@ -73,9 +77,9 @@ function _check_password($pwd1,$pwd2,$minsize) {
  */
 function _check_pwd_question($question,$minsize,$maxsize) {
     if(mb_strlen($question,'utf-8') < $minsize || mb_strlen($question,'utf-8') > $maxsize) {
-        _alert_back("密码提示必须为".$minsieze.'到'.$maxsize.'位');
+        _alert_back("密码提示必须为".$minsize.'到'.$maxsize.'位');
     }
-    return mysql_real_escape_string($question);
+    return _mysql_string($question);
 }
 /**
  * _check_answer检查密码提示问题的答案是否输入正确
@@ -93,7 +97,7 @@ function _check_pwd_answer($question, $answer, $minsize, $maxsize) {
     if($question == $answer){
         _alert_back('密码提示和密码回答不得相同!');
     }
-    return sha1($answer);
+    return _mysql_string(sha1($answer));
 }
 
 /**
@@ -110,7 +114,7 @@ function _check_email($email) {
     if(!preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $email)){
         _alert_back("请输入正确的邮件地址!");
     }
-    return mysql_real_escape_string($email);
+    return _mysql_string($email);
 }
 
 /**
@@ -128,7 +132,7 @@ function _check_qq($qq){
     if(!preg_match($mode, $qq)){
         _alert_back("请输入正确的QQ号!");
     }
-    return $qq;
+    return _mysql_string($qq);
 }
 
 /**
@@ -145,6 +149,6 @@ function _check_url($url){
     if(!preg_match($mode, $url)){
         _alert_back("请输入正确的个人主页!");
     }
-    return $url;
+    return _mysql_string($url);
 }
 ?>
