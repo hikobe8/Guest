@@ -15,7 +15,9 @@ if(($_GET['action'] == 'register')){
     include ROOT_PATH.'includes/register.func.php';
     //用一个数组保存表单提交个数据
     $clean = array();
-    //将通过验证的姓名赋值到数组中
+    //生成一个激活id
+    $clean['active'] = sha1(uniqid(rand(),true));
+    $clean['uniqid'] = _check_uniqid($_POST['uniqid'], $_SESSION['uniqid']);
     $clean['username'] = _check_username($_POST['username'], 2, 20);
     $clean['password'] = _check_password($_POST['password'], $_POST['notpassword'], 6);
     $clean['sex'] = $_POST['sex'];
@@ -26,6 +28,9 @@ if(($_GET['action'] == 'register')){
     $clean['qq'] = _check_qq($_POST['qq']);
     $clean['url'] = _check_url($_POST['url']);
     print_r($clean);
+} else {
+    //生成uniqid
+    $_SESSION['uniqid'] = $uniqid = sha1(uniqid(rand(),true));
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -45,6 +50,7 @@ require ROOT_PATH . "includes/header.inc.php";
 <div id="register">
 	<h2>用户注册</h2>
 	<form method="post" name="registerform" action="register.php?action=register">
+	<input type="hidden" name="uniqid" value="<?php echo $uniqid;?>"/>
 	<dl>
 		<dt>请认真填写以下信息</dt>
 	 	<dd>用 户 名：<input type="text" name="username" class="text"/>(*必填，至少两位)</dd>

@@ -1,4 +1,14 @@
 <?php
+
+    /**
+     * _uniqid 返回一个唯一标识符
+     * @access public
+     * @return string 40位的唯一标识符
+     */
+    function _uniqid(){
+        return sha1(uniqid(rand(),true));
+    }
+
     /**
      * _mysql_string 返回一个mysql的转义字符串 提高写入数据库的安全性
      * @access public 

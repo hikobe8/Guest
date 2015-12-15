@@ -21,6 +21,20 @@ if(!function_exists("_mysql_string")){
 }
 
 /**
+ * _check_uniqid 检查唯一标识符
+ * @access public
+ * @param string $first_id 表单中的唯一标识符
+ * @param string $end_id 服务器生成唯一标识符
+ * @return string 如果验证通过返回表单生成的标识符
+ */
+function _check_uniqid($first_id, $end_id) {
+    if(strlen($first_id) != 40 || $first_id != $end_id) {
+        _alert_back("唯一标识符异常!");
+    }
+    return _mysql_string($first_id);
+}
+
+/**
  * 检查一个用户名是否符合规则
  * @param unknown $name 用户名
  * @param unknown $minsize 用户名的最小长度
