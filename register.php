@@ -26,12 +26,9 @@ if(($_GET['action'] == 'register')){
     $clean['email'] = _check_email($_POST['email'],6,40);
     $clean['qq'] = _check_qq($_POST['qq']);
     $clean['url'] = _check_url($_POST['url']);   
-    $_conn = @mysql_connect(_DB_HOST, _DB_USER, _DB_PWD) or die("数据库连接失败");
-    mysql_select_db(_DB_NAME);
-//    mysql_query("INSERT INTO tg_user (tg_username) values ('fuck')");
-    //设置字符编码集
-    mysql_query("SET NAMES UTF8");
-    mysql_query("INSERT INTO tg_user (
+    //防止重复注册
+    _is_repeat("SELECT * FROM tg_user WHERE tg_username = '{$clean['username']}'", "用户名重复,请重新注册!");
+    _query("INSERT INTO tg_user (
                                                 tg_uniqid,
                                                 tg_username,
                                                 tg_password,
@@ -62,6 +59,7 @@ if(($_GET['action'] == 'register')){
                                                 NOW(),
                                                 '{$_SERVER['REMOTE_ADDR']}'
                                                 )");
+    _location("恭喜您，注册成功!", 'index.php');
 } else {
     //生成uniqid
     $_SESSION['uniqid'] = $uniqid = sha1(uniqid(rand(),true));
@@ -76,6 +74,7 @@ if(($_GET['action'] == 'register')){
 ?>
 <script type="text/javascript" src="js/code.js"></script>
 <script type="text/javascript" src="js/face.js"></script>
+<script type="text/javascript" src="js/register.js"></script>
 </head>
 <body>
 <?php
@@ -94,7 +93,7 @@ require ROOT_PATH . "includes/header.inc.php";
 	 	<dd>密码回答: <input type="text" name="passd" class="text"/>(*必填，至少两位)</dd>
 	 	<dd>性　　别: <input type="radio" name="sex" value="男" checked="checked"/>男<input type="radio" name="sex" value="女"/>女</dd>	
 	 	<dd class='face'><input type="hidden" name="facesrc" value="face/m01.gif" /><img src="face/m01.gif" alt="头像选择" id='faceImg'></dd>
-	 	<dd>电子邮件: <input type="text" name="email"class="text"/></dd>
+	 	<dd>电子邮件: <input type="text" name="email"class="text"/>(*必填，激活账户)</dd>
 	 	<dd>　QQ　　: <input type="text" name="qq"class="text"/></dd>
 	 	<dd>主页地址: <input type="text" name="url" value="http://" class="text"/></dd>
 	 	<dd>验 证 码：<input type="text" name="code" class="text_yzm"/><img src="authcode.php" id="code"/></dd>

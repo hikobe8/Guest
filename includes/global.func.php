@@ -34,6 +34,20 @@
         }
     }
     
+    /**
+     * _location 跳转到指定页面
+     * @access public
+     * @param string $info 提示信息
+     * @param string $desturl 目标地址
+     */
+    function _location($info,$desturl){
+        if(!empty($info)) {
+            echo "<script>alert('$info');location.href='$desturl'</script>";
+        } else {
+            header('Location:'.$desturl);
+        }
+    }
+    
 	/**
 	 * 获取执行耗时
 	 * @access public
@@ -48,7 +62,7 @@
 	 * @param string $info 提示信息
 	 */
 	function _alert_back($info){
-	    echo "<script>alert('$info'),history.back();</script>";
+	    echo "<script>alert('$info');history.back();</script>";
 	    exit();
 	}
 	

@@ -28,9 +28,9 @@ if (PHP_VERSION < '4.1.0') {
  * 定义引用使用的根路径，使用绝对路径加快引用速度
 */
 define ( "ROOT_PATH", substr ( dirname ( __FILE__ ), 0, - 8 ) );
-//引入公共函数库
+//引入函数库
 require ROOT_PATH.'includes/global.func.php';
-
+require ROOT_PATH.'includes/mysql.func.php';
 //页面执行耗时的开始时间
 define('START_TIME', _runtime());
 
@@ -39,4 +39,9 @@ define('_DB_HOST', 'localhost');
 define('_DB_USER', 'root');
 define('_DB_PWD', 'root');
 define('_DB_NAME', 'testguest');
+
+_connectDB();
+_selectDB();
+_setNames();
+
 ?>

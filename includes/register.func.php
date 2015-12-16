@@ -124,16 +124,13 @@ function _check_pwd_answer($question, $answer, $minsize, $maxsize) {
  * @return 合法的邮件地址 / 空值
  */
 function _check_email($email,$_min_num, $_max_num) {
-    if(empty($email)){
-        return null;
+    if (strlen($email) < $_min_num || strlen($eamil) > $_max_num) {
+        _alert_back('邮件长度不合法！');
     }
     //hikobe@163.com
     if(!preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $email)){
         _alert_back("请输入正确的邮件地址!");
-    }
-    if (strlen($email) < $_min_num || strlen($eamil) > $_max_num) {
-        _alert_back('邮件长度不合法！');
-    }
+    } 
     return _mysql_string($email);
 }
 
