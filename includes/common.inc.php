@@ -33,4 +33,10 @@ require ROOT_PATH.'includes/global.func.php';
 
 //页面执行耗时的开始时间
 define('START_TIME', _runtime());
+
+//定义数据库连接使用的常量
+define('_DB_HOST', 'localhost');
+define('_DB_USER', 'root');
+define('_DB_PWD', 'root');
+define('_DB_NAME', 'testguest');
 ?>

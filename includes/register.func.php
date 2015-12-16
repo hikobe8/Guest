@@ -162,7 +162,7 @@ function _check_qq($qq){
  * @return string 合法的主页地址或null
  */
 function _check_url($url){
-    if(empty($url)){
+    if('http://' == $url ||empty($url)){
         return null;
     }
     $mode = '/^https?:\/\/(\w+\.)?[\w\-\.]+(\.\w+)+$/';

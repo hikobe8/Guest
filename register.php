@@ -7,14 +7,13 @@ define("SCRIPT", 'register');
 session_start();
 // 引入公共文件
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
-
 if(($_GET['action'] == 'register')){
     //检查验证码
     _checkcode($_POST['code'],$_SESSION['code']);
     //引入注册检查过滤的函数库
     include ROOT_PATH.'includes/register.func.php';
     //用一个数组保存表单提交个数据
-    $clean = array();
+     $clean = array();
     //生成一个激活id
     $clean['active'] = sha1(uniqid(rand(),true));
     $clean['uniqid'] = _check_uniqid($_POST['uniqid'], $_SESSION['uniqid']);
@@ -26,8 +25,43 @@ if(($_GET['action'] == 'register')){
     $clean['passd'] = _check_pwd_answer($_POST['passt'], $_POST['passd'], 2, 8);
     $clean['email'] = _check_email($_POST['email'],6,40);
     $clean['qq'] = _check_qq($_POST['qq']);
-    $clean['url'] = _check_url($_POST['url']);
-    print_r($clean);
+    $clean['url'] = _check_url($_POST['url']);   
+    $_conn = @mysql_connect(_DB_HOST, _DB_USER, _DB_PWD) or die("数据库连接失败");
+    mysql_select_db(_DB_NAME);
+//    mysql_query("INSERT INTO tg_user (tg_username) values ('fuck')");
+    //设置字符编码集
+    mysql_query("SET NAMES UTF8");
+    mysql_query("INSERT INTO tg_user (
+                                                tg_uniqid,
+                                                tg_username,
+                                                tg_password,
+                                                tg_question,
+                                                tg_answer,
+                                                tg_email,
+                                                tg_qq,
+                                                tg_url,
+                                                tg_active,
+                                                tg_sex,
+                                                tg_face,
+                                                tg_reg_time,
+                                                tg_last_time,
+                                                tg_last_ip
+                                    ) values (
+                                                '{$clean['uniqid']}',
+                                                '{$clean['username']}',
+                                                '{$clean['password']}',
+                                                '{$clean['passt']}',
+                                                '{$clean['passd']}',
+                                                '{$clean['email']}',
+                                                '{$clean['qq']}',
+                                                '{$clean['url']}',
+                                                '{$clean['active']}',
+                                                '{$clean['sex']}',
+                                                '{$clean['facesrc']}',
+                                                NOW(),
+                                                NOW(),
+                                                '{$_SERVER['REMOTE_ADDR']}'
+                                                )");
 } else {
     //生成uniqid
     $_SESSION['uniqid'] = $uniqid = sha1(uniqid(rand(),true));
