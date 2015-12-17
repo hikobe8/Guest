@@ -7,7 +7,7 @@ window.onload = function () {
  	mFace.onclick = function(){
  		window.open('face.php','face',"width=400,height=400,top=0,left=0,scrollbars=1");
  	}
- 	var form = document.getElementsByTagName('registerform')[0];
+ 	var form = document.getElementsByTagName('form')[0];
  	form.onsubmit =  function () {
  		//验证用户名长度
  		if(form.username.value.length < 2 || form.username.value.length > 20) {

@@ -35,7 +35,7 @@
     }
     
     /**
-     * _location 跳转到指定页面
+     * _location 跳转到指定页面 第一个参数为空即直接跳转没有提示信息
      * @access public
      * @param string $info 提示信息
      * @param string $desturl 目标地址
@@ -114,5 +114,12 @@
 	 */
 	function _rand($x) {
 	    return mt_rand(0, $x);
+	}
+	
+	/**
+	 * _session_destroy 销毁 session
+	 */
+	function _session_destroy() {
+	    session_destroy();
 	}
 ?>

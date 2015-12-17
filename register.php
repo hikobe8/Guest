@@ -5,7 +5,7 @@ define ( "IN_TG", true );
 define("SCRIPT", 'register');
 //打开session
 session_start();
-// 引入公共文件
+// 引入公共文件d
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
 if(($_GET['action'] == 'register')){
     //检查验证码
@@ -59,7 +59,15 @@ if(($_GET['action'] == 'register')){
                                                 NOW(),
                                                 '{$_SERVER['REMOTE_ADDR']}'
                                                 )");
-    _location("恭喜您，注册成功!", 'index.php');
+    if(_affect_rows() != 1) {
+        _closeDB();
+        _session_destroy();
+        _location("注册失败,请重新注册!", 'register.php');
+    } else {
+        _closeDB();
+        _session_destroy();
+        _location("恭喜您,注册成功,点击跳转到激活页面!", 'active.php?active='.$clean['active']);
+    }
 } else {
     //生成uniqid
     $_SESSION['uniqid'] = $uniqid = sha1(uniqid(rand(),true));
@@ -73,7 +81,6 @@ if(($_GET['action'] == 'register')){
 <?php require ROOT_PATH.'includes/title.inc.php';
 ?>
 <script type="text/javascript" src="js/code.js"></script>
-<script type="text/javascript" src="js/face.js"></script>
 <script type="text/javascript" src="js/register.js"></script>
 </head>
 <body>
@@ -96,7 +103,7 @@ require ROOT_PATH . "includes/header.inc.php";
 	 	<dd>电子邮件: <input type="text" name="email"class="text"/>(*必填，激活账户)</dd>
 	 	<dd>　QQ　　: <input type="text" name="qq"class="text"/></dd>
 	 	<dd>主页地址: <input type="text" name="url" value="http://" class="text"/></dd>
-	 	<dd>验 证 码：<input type="text" name="code" class="text_yzm"/><img src="authcode.php" id="code"/></dd>
+	 	<dd>验 证 码：<input type="text" name="code" class="text_code"/><img src="authcode.php" id="code"/></dd>
 	 	<dd><input type="submit" name="register" value="注册" class="submit"></dd>
 	</dl>
 	</form>

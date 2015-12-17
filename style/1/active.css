@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+#active{
+	width: auto;
+	height: 600px;
+	border: 2px solid #ccc;
+}
+#active h2{
+	text-font: 16px;
+	text-indent: 0px;
+	text-align: center;
+}
+#active p{
+	margin: 20px;
+	text-align: center;
+}

@@ -20,7 +20,16 @@ if(!defined('IN_TG')){
 function _connectDB(){
     global $conn;
     if(!$conn = @mysql_connect(_DB_HOST, _DB_USER, _DB_PWD)){
-        exit("数据库连接失败");
+        exit("数据库连接失败！");
+    }
+}
+
+/**
+ * _closeDB 关闭当前连接的数据库
+ */
+function _closeDB(){
+    if(!mysql_close()) {
+        exit('数据库关闭异常！');
     }
 }
 
@@ -29,7 +38,7 @@ function _connectDB(){
  */
 function _selectDB(){
     if(!mysql_select_db(_DB_NAME)){
-        exit("找不到指定的数据库");
+        exit("找不到指定的数据库!");
     }
 }
 
@@ -74,4 +83,13 @@ function _is_repeat($sql, $info){
         _alert_back($info);
     }
 }
+
+/**
+ * 返回上一次mysql语句执行的影响条数
+ * @return int
+ */
+function _affect_rows(){
+    return mysql_affected_rows();
+}
+
 ?>
