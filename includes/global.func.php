@@ -108,6 +108,7 @@
 	    imagepng($image);
 	    imagedestroy($image);
 	}
+	
 	/**
 	 * @access public
 	 * @return 0~$x 随机数
@@ -121,5 +122,23 @@
 	 */
 	function _session_destroy() {
 	    session_destroy();
+	}
+	
+	/**
+	 *_logout 注销登录并销毁session
+	 */
+	function _logout(){
+	    setcookie('username','',time()-3600);
+	    setcookie('uniqid','',time()-3600);
+	    _session_destroy();
+	}
+	
+	/**
+	 * _check_login_state检查当前的登录状态 避免登录状态下的误操作
+	 */
+	function _check_login_state() {
+	    if(isset($_COOKIE['username'])){
+	        _alert_back("登录状态不能进行此操作!");
+	    }
 	}
 ?>

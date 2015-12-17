@@ -3,10 +3,12 @@
 define ( "IN_TG", true );
 //定义调用样式的常量
 define("SCRIPT", 'register');
-//打开session
-session_start();
 // 引入公共文件d
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
+//检查登录状态
+_check_login_state();
+//打开session
+session_start();
 if(($_GET['action'] == 'register')){
     //检查验证码
     _checkcode($_POST['code'],$_SESSION['code']);

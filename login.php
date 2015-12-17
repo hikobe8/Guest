@@ -12,10 +12,12 @@
 define ( "IN_TG", true );
 //定义调用样式的常量
 define("SCRIPT", 'login');
-//打开session
-session_start();
 // 引入公共文件
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
+//打开session
+session_start();
+//检查登录状态
+_check_login_state();
 if($_GET['action'] == 'login') {
     //检查验证码
     _checkcode($_POST['code'],$_SESSION['code']);
@@ -25,10 +27,11 @@ if($_GET['action'] == 'login') {
     $clean['username'] = _check_username($_POST['username'], 2, 20);
     $clean['password'] = _check_password($_POST['password'],6);
     $clean['save'] = _check_saved_time($_POST['save']);
-    $_sql = "SELECT tg_username,tg_uniqid FROM tg_user WHERE tg_username='{$clean['username']}' && tg_password='{$clean['password']}' && tg_active=NULL";
+    $_sql = "SELECT tg_username,tg_uniqid FROM tg_user WHERE tg_username='{$clean['username']}' AND tg_password='{$clean['password']}' AND tg_active=''";
     if(!!$row = _fetch_array($_sql)){
         _closeDB();
         _session_destroy();
+        _set_cookies_user($row['tg_username'],$row['tg_uniqid'], $clean['save']);
         _location(null, "index.php");
     } else {
         _closeDB();
