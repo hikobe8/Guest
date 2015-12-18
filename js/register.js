@@ -52,14 +52,12 @@ window.onload = function () {
  			return false;
  		}
  		//验证邮箱
- 		if(form.email.value != '') {
- 			if(!'/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/'.test(form.email.value)) {
- 				alert('请输入正确的邮箱地址!');
- 			form.email.value = '';
- 			form.eamil.focus();
- 			return false;
- 			}
- 		}
+		if(form.email.value == '' || !'/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/'.test(form.email.value)) {
+			alert('请输入正确的邮箱地址!');
+		form.email.value = '';
+		form.eamil.focus();
+		return false;
+		}
  		//验证QQ
  		if(form.qq.value != '') {
  			if(!'/^[1-9]{1}[\d]{5,9}$/'.test(form.qq.value)) {

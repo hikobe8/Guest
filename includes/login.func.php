@@ -53,6 +53,11 @@ function _check_password($pwd,$minsize) {
     return _mysql_string(sha1($pwd));
 }
 
+/**
+ * _check_saved_time 检查需要保存的时间
+ * @param string $time 需要保存的时间的类型 0-不保存  1-一天  2-一周  3-一个月
+ * @return string 需要保存的时间
+ */
 function _check_saved_time($time){
     $times[0] = '0';
     $times[1] = '1';
@@ -62,5 +67,33 @@ function _check_saved_time($time){
         exit("保存时间出错!");
     }
     return _mysql_string($time);
+}
+
+/**
+ * _set_Cookies_user 生成用户登陆的cookies 并且根据选择的保存类型保存cookie
+ * @param string $username 用户名
+ * @param string $uniqid 用户唯一标识符
+ * @param string $timetype 保存的时间
+ */
+function _set_cookies_user($username, $uniqid, $timetype) {
+    setcookie('uniqid', $uniqid);
+    switch ($timetype){
+        case '0':
+            setcookie('username', $username);
+            setcookie('uniqid', $uniqid);
+            break;
+        case '1':
+            setcookie('username', $username, time()+86400);
+            setcookie('uniqid', $uniqid, time()+86400);
+            break;
+        case '2':
+            setcookie('username', $username, time()+604800);
+            setcookie('uniqid', $uniqid, time()+604800);
+            break;
+        case '3':
+            setcookie('username', $username, time()+2592000);
+            setcookie('uniqid', $uniqid, time()+2592000);
+            break;
+    }
 }
 ?>
