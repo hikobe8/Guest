@@ -26,6 +26,7 @@ if($_GET['action'] == 'login') {
     $clean['password'] = _check_password($_POST['password'],6);
     $clean['save'] = _check_saved_time($_POST['save']);
     $_sql = "SELECT tg_username,tg_uniqid FROM tg_user WHERE tg_username='{$clean['username']}' && tg_password='{$clean['password']}' && tg_active=NULL";
+    print_r($clean);
     if(!!$row = _fetch_array($_sql)){
         _closeDB();
         _session_destroy();
