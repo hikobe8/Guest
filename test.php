@@ -9,11 +9,10 @@
  * Date:2015年12月18日下午5:29:53
 */
 // 定义防止恶意调用使用的常量
-define ( "IN_TG", true );
+//define ( "IN_TG", true );
 // 引入公共文件d
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
-for ($i = 0;$i < 30; $i ++ ){
-    _query("INSERT INTO tg_user (
+$insert = "INSERT INTO tg_user (
                                                 tg_uniqid,
                                                 tg_username,
                                                 tg_password,
@@ -43,8 +42,9 @@ for ($i = 0;$i < 30; $i ++ ){
                                                     NOW(),
                                                     NOW(),
                                                     '{$_SERVER['REMOTE_ADDR']}'
-    )");
-}
-echo "insert success!";
+    )";
+$update = "UPDATE tg_user set tg_password = '"._mysql_string(sha1('123456'))."'WHERE tg_password='123456'";
+_query($update);
+echo "success!";
 ?>
 
