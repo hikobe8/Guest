@@ -74,6 +74,15 @@ function _fetch_array($sql){
 }
 
 /**
+ * _fetch_array_list 获取结果集的一行数据
+ * @access public
+ * @param resource $result
+ * @return array 返回资源的一行结果集,下标为列名,可以使用while+此函数遍历结果集
+ */
+function _fetch_array_list($result) {
+    return mysql_fetch_array($result, MYSQL_ASSOC);
+}
+/**
  * _is_repeat 判断当前sql语句查询的结果是否已存在于数据库
  * @param string $sql sql语句
  * @param string $info 提示信息

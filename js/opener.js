@@ -2,7 +2,7 @@ window.onload = function() {
 	var imgs = document.getElementsByTagName('img');
 	for(var i = 0; i < imgs.length; i ++){
 		imgs[i].onclick = function (){
-			_opener(this.alt);
+			_opener(this.src);
 		}
 	}
 };
