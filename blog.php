@@ -12,7 +12,7 @@
 define ( "IN_TG", true );
 //定义调用样式的常量
 define("SCRIPT", 'blog');
-// 引入公共文件d
+// 引入公共文件
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -28,8 +28,17 @@ require dirname ( __FILE__ ) . '/includes/common.inc.php';
 <body>
 <?php
 require ROOT_PATH . "includes/header.inc.php";
-$_sql = "SELECT tg_id,tg_username,tg_face,tg_sex FROM tg_user WHERE tg_active='' ORDER BY tg_last_time DESC";
-//取出所有激活的用户 并且以登录时间降序排序
+$_page_num = 1;
+if(isset($_GET['page'])){
+    $_page_num = $_GET['page'];
+}
+$_page_size = 10;
+$_start_index = ($_page_num - 1)*$_page_size;
+$_user_count = mysql_num_rows(_query("SELECT tg_id FROM tg_user WHERE tg_active=''"));
+//计算页数
+$_page_count = ceil($_user_count / $_page_size);
+$_sql = "SELECT tg_id,tg_username,tg_face,tg_sex FROM tg_user WHERE tg_active = '' ORDER BY tg_reg_time DESC LIMIT ".$_start_index.",".$_page_size;
+//取出所有激活的用户 并且以注册时间降序排序
 $_result = _query($_sql);
 ?>
 <div id='blog'>
@@ -43,7 +52,7 @@ $_result = _query($_sql);
         $_user['sex'] = $_row['tg_sex'];
 ?>
 <dl>
-<dd class='user'><?php echo $_user['username']?></dd>
+<dd class='user'><?php echo $_user['username'].'('.$_user['sex'].')'?></dd>
 <dt><img src="<?php echo $_user['face']?>"/></dt>
 <dd class='message'>发消息</dd>
 <dd class='friend'>加为好友</dd>
@@ -53,6 +62,15 @@ $_result = _query($_sql);
 <?php 
    }
 ?>
+<div id='page_num'>
+<ul> 
+<?php 
+    for ($_i = 1; $_i <= $_page_count; $_i ++){
+        echo '<li><a href="blog.php?page='.$_i.'">'.$_i.'</a></li>';      
+    }
+?>
+</ul>
+</div>
 </div>
 <?php
 require ROOT_PATH . "includes/footer.inc.php";
