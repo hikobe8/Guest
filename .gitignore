@@ -1,4 +1,4 @@
 # 只忽略当前目录下的.settings文件和目录，子目录的.settings不在忽略范围内
 /.settings
-/register.php
+
 /test.php
