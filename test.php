@@ -10,9 +10,9 @@
 */
 // 定义防止恶意调用使用的常量
 //define ( "IN_TG", true );
-// 引入公共文件d
+//引入公共文件d
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
-$insert = "INSERT INTO tg_user (
+/* $insert = "INSERT INTO tg_user (
                                                 tg_uniqid,
                                                 tg_username,
                                                 tg_password,
@@ -42,9 +42,13 @@ $insert = "INSERT INTO tg_user (
                                                     NOW(),
                                                     NOW(),
                                                     '{$_SERVER['REMOTE_ADDR']}'
-    )";
+    )"; */
 $update = "UPDATE tg_user set tg_password = '"._mysql_string(sha1('123456'))."'WHERE tg_password='123456'";
-_query($update);
+for ($_i = 0;$_i < 30; $_i ++){
+    $_updateface = "UPDATE tg_user set tg_face = 'face/m"._mysql_string($_i+24).".gif' WHERE tg_username='狗伏".$_i."'";
+    _query($_updateface);
+}
+_closeDB();
 echo "success!";
 ?>
 
