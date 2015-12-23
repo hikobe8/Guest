@@ -58,7 +58,7 @@ function _setNames(){
  */
 function _query($sql){
     if(!$result = mysql_query($sql)){
-        exit("sql语句执行错误!");
+        exit("sql语句执行错误!".mysql_error());
     } 
     return $result;   
 }
