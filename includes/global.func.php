@@ -141,4 +141,83 @@
 	        _alert_back("登录状态不能进行此操作!");
 	    }
 	}
+	
+	/**
+	 * _page 设置分页的数据 
+	 * @access public
+	 * @param string $_sql 查询语句
+	 * @param unknown $_size 每页显示数量
+	 */
+	function _page($_sql, $_size){
+	    global $_page_count, $_page_num, $_page_count, $_user_count,$_start_index,$_page_size;
+	    /**
+	     * $_page_num 页码
+	     */
+	    $_page_num = 1;
+	    /**
+	     * $_page_size 每页的数量
+	     */
+	    $_page_size = $_size;
+	    $_user_count = mysql_num_rows(_query($_sql));
+	    /**
+	     * $_page_count 总页数/最大页码
+	    */
+	    $_page_count = ceil($_user_count / $_page_size);
+	    if(isset($_GET['page'])){
+	        $_page_num = $_GET['page'];
+	        //检查GET传过来的非法页码
+	        if(empty($_page_num) || !is_numeric($_page_num)) {
+	            $_page_num = 1;
+	        } else {
+	            if($_page_num > $_page_count) {
+	                $_page_num = $_page_count;
+	            }
+	            if($_page_num < 0){
+	                $_page_num = 1;
+	            }
+	            $_page_num = intval($_page_num);
+	        }
+	    
+	    }
+	    $_start_index = ($_page_num - 1)*$_page_size;
+	}
+	
+	/**
+	 * _paging 在当前页面使用分页 
+	 * @access public
+	 * @param int $_type 1-数字分页 2-文字分页
+	 */
+	function _paging($_type){
+	    global $_page_count, $_page_num, $_page_count, $_user_count;
+	    if($_type == 1){
+	        echo '<div id="page_num">';
+	        echo '<ul>';
+	            for ($_i = 1; $_i <= $_page_count; $_i ++){
+	            echo '<li><a href="blog.php?page='.$_i.'">'.$_i.'</a></li>';
+	        }
+	        echo '</ul>';
+	        echo '</div>';
+	    } else {
+	        echo '<div id="page_text">';
+	        echo '<ul>';
+	        echo '<li>'.$_page_num.'/'.$_page_count.'页 | </li>';
+	        echo '<li>共有<strong>'.$_user_count.'</strong>个会员 | </li>'; 
+            if ($_page_num == 1) {
+                echo "<li>首页 | </li>";
+                echo "<li>上一页 | </li>";
+            } else {
+                echo '<li><a href="'.SCRIPT.'.php">首页 </a>| </li>';
+                echo '<li><a href="'.SCRIPT.'.php?page='.($_page_num - 1).'">上一页</a> | </li>';
+            }
+            if ($_page_num == $_page_count) {
+                echo "<li>下一页 | </li>";
+                echo "<li>尾页</li>";
+            } else {
+                echo '<li><a href="'.SCRIPT.'.php?page='.($_page_num + 1).'">下一页 </a>| </li>';
+                echo '<li><a href="'.SCRIPT.'.php?page='.$_page_count.'">尾页</a></li>';
+            }
+    	    echo '</ul>';
+    	    echo '</div>';
+	    }
+	}
 ?>
