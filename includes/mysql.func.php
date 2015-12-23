@@ -101,4 +101,12 @@ function _affect_rows(){
     return mysql_affected_rows();
 }
 
+/**
+ * _free_result 释放查询结果集占用的资源
+ * @access public 
+ * @param resource $_result 结果集 
+ */
+function _free_result($_result) {
+    mysql_free_result($_result);
+}
 ?>

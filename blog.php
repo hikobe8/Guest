@@ -43,6 +43,7 @@ $_result = _query($_sql);
         $_user['username'] = $_row['tg_username'];
         $_user['face'] = $_row['tg_face'];
         $_user['sex'] = $_row['tg_sex'];
+        $_user = _html($_user);
 ?>
 <dl>
 <dd class='user'><?php echo $_user['username'].'('.$_user['sex'].')'?></dd>
@@ -54,6 +55,7 @@ $_result = _query($_sql);
 </dl>
 <?php 
    }
+   _free_result($_result);
 ?>
 <?php 
     _paging(2);

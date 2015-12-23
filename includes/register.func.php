@@ -82,6 +82,22 @@ function _check_password($pwd1,$pwd2,$minsize) {
     return _mysql_string(sha1($pwd1));
 }
 /**
+ * _check_password_modify 检查修改的密码
+ * @param string $_pwd 密码
+ * @param int $minsize 最短长度
+ * @return string 转义的密码
+ */
+function _check_password_modify($_pwd, $minsize) {
+    if(empty($_pwd)){
+        return null;
+    }
+    if(strlen($_pwd) < $minsize){
+        _alert_back("密码不得小于".$minsize.'位');
+    }
+    return _mysql_string(sha1($_pwd));
+}
+
+/**
  * _check_pwd_question()检查密码提示是否输入正确
  * @access public
  * @param string $question 密码提示

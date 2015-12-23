@@ -17,7 +17,7 @@ require dirname ( __FILE__ ) . '/includes/common.inc.php';
 if(!isset($_COOKIE['username'])){
     _alert_back("非法登录!");
 } else {
-    $_sql = "SELECT tg_username,tg_sex,tg_face,tg_email,tg_url,tg_qq,tg_reg_time FROM tg_user WHERE tg_username = '".$_COOKIE['username']."'";
+    $_sql = "SELECT tg_username,tg_sex,tg_face,tg_email,tg_url,tg_qq,tg_reg_time,tg_level FROM tg_user WHERE tg_username = '".$_COOKIE['username']."'";
     if(!!$_row = _fetch_array($_sql)){
         $_html = array();
         $_html['username'] = $_row['tg_username'];
@@ -27,6 +27,7 @@ if(!isset($_COOKIE['username'])){
         $_html['url'] = $_row['tg_url'];
         $_html['qq'] = $_row['tg_qq'];
         $_html['reg_time'] = $_row['tg_reg_time'];
+        $_html['level'] = $_row['tg_level'];
         $_html =_html($_html);
     } else {
         _alert_back("用户不存在");
@@ -39,8 +40,6 @@ if(!isset($_COOKIE['username'])){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>多用户留言系统--博友</title>
 <?php require ROOT_PATH.'includes/title.inc.php';?> 
-<script type="text/javascript" src="js/code.js"></script>
-<script type="text/javascript" src="js/register.js"></script>
 </head>
 <body>
 <?php
@@ -58,7 +57,7 @@ require ROOT_PATH . "includes/header.inc.php";
     <dd>主　　页: <?php echo $_html['url']?></dd>
     <dd>Q　　　Q: <?php echo $_html['qq']?></dd>
     <dd>注册时间: <?php echo $_html['reg_time']?></dd>
-    <dd>身　　份: 逗逼</dd>
+    <dd>身　　份: <?php echo $_html['level'] == 0?'普通会员':'管理员'?></dd>
     </dl>
     </div>
 </div>

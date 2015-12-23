@@ -67,3 +67,33 @@
 	border-bottom: 1px dashed #ccc;
 	font-size: 14px;
 }
+#member div.main dl dd input.text{
+	width: 220px;
+	height: 22px;
+	border: 1px dashed #ccc;
+	background: #fff;
+	margin:5px 0;
+}
+#member div.main dl dd input.text_code{
+	width: 60px;
+	height: 22px;
+	line-height:22px;
+	border: 1px dashed #ccc;
+	background: #fff;
+	margin:auto 0;
+}
+#member div.main dl dd input.submit{
+	width: 60px;
+	height: 19px;
+	border: 1px dashed #ccc;
+	background: #fff;
+	cursor: pointer;
+	margin: 10px 0 0 0px;
+}
+#member div.main dl dd img#code{
+	position:relative;
+	top:7px;
+	left:10px;
+	cursor:pointer;
+	margin:auto 0;
+}
