@@ -220,4 +220,19 @@
     	    echo '</div>';
 	    }
 	}
+	/**
+	 * _html 转义html特殊字符为普通字符
+	 * @param string $_string 字符串或字符数组
+	 * @return string 转义的字符串或者字符数组
+	 */
+	function _html($_string){
+	    if(is_array($_string)){
+	        foreach ($_string as $_key => $_value) {
+	           $_string[$_key] = _html($_value);   
+	        }
+	    } else {
+	        $_string = htmlspecialchars($_string);
+	    }
+	    return $_string;
+	}
 ?>
