@@ -29,10 +29,11 @@ if($_GET['action'] == 'login') {
     $clean['save'] = _check_saved_time($_POST['save']);
     $_sql = "SELECT tg_username,tg_uniqid FROM tg_user WHERE tg_username='{$clean['username']}' AND tg_password='{$clean['password']}' AND tg_active=''";
     if(!!$row = _fetch_array($_sql)){
+        _updateLoginInfo($row['tg_username']);
         _closeDB();
         _session_destroy();
         _set_cookies_user($row['tg_username'],$row['tg_uniqid'], $clean['save']);
-        _location(null, "index.php");
+        _location(null, "member.php");
     } else {
         _closeDB();
         _session_destroy();

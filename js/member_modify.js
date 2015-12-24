@@ -3,13 +3,16 @@
  */
 window.onload = function () {
  	code();
- 	var mFace = document.getElementById('faceImg');
- 	mFace.onclick = function(){
- 		alert("dddddd");
- 		window.open('face.php','face',"width=400,height=400,top=0,left=0,scrollbars=1");
- 	}
  	var form = document.getElementsByTagName('form')[0];
- 	form.onsubmit =  function () {	
+ 	form.onsubmit =  function () {
+ 		//检查验证码的长度
+ 		if(form.code.value.length != 4){
+ 				alert('请输入4位验证码!');
+	 			form.code.value = '';
+	 			form.code.focus();
+	 			return false;
+ 		}
+ 			
  		//验证密码长度
  		if(form.password.value != '') {
  			if(form.password.value.length < 6 ) {
@@ -19,7 +22,6 @@ window.onload = function () {
  			return false;
  			}
  		}
- 		
  		//验证邮箱
 		if(form.email.value == '' || !'/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/'.test(form.email.value)) {
 			alert('请输入正确的邮箱地址!');
@@ -44,13 +46,6 @@ window.onload = function () {
 	 			form.url.focus();
 	 			return false;
  			}
- 		}
- 		//检查验证码的长度
- 		if(form.code.value.length != 4){
- 				alert('请输入4位验证码!');
-	 			form.code.value = '';
-	 			form.code.focus();
-	 			return false;
  		}
  		return true;
  	}

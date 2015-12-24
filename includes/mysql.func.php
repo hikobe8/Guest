@@ -109,4 +109,32 @@ function _affect_rows(){
 function _free_result($_result) {
     mysql_free_result($_result);
 }
+
+/**
+ * _check_cookie_uniqid 用于验证本地存储的uniqid
+ * @access public
+ * @param unknown $_native_uniqid 本地uniqid
+ * @param unknown $_server_uniqid 服务器数据库的uniqid
+ */
+function _check_cookie_uniqid($_native_uniqid, $_server_uniqid) {
+    if($_native_uniqid != $_server_uniqid){
+        _alert_back("uniqid 错误");
+    }
+}
+
+
+/**
+ * _updateLoginInfo 登录成功保存用户的最后登录时间,ip,以及登陆次数加1
+ * @access public
+ * @param string $_username 用户名
+ * @return null
+ */
+function _updateLoginInfo($_username) {
+    $_sql = "UPDATE tg_user SET
+    tg_last_time=NOW(),
+    tg_last_ip='{$_SERVER['REMOTE_ADDR']}',
+    tg_login_count=tg_login_count+1
+    WHERE tg_username='$_username'";
+    _query($_sql);
+}
 ?>

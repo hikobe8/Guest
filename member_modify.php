@@ -16,6 +16,9 @@ define("SCRIPT", 'member');
 // 引入公共文件
 require dirname ( __FILE__ ) . '/includes/common.inc.php';
 if(isset($_GET['action']) && $_GET['action'] == 'modify'){
+    $_uniqid_sql = "SELECT tg_uniqid FROM tg_user WHERE tg_username='".$_COOKIE['username']."'";
+    $_row = _fetch_array($_uniqid_sql);
+    _check_cookie_uniqid($_COOKIE['uniqid'], $_row['tg_uniqid']);
     //检查验证码
     _checkcode($_POST['code'],$_SESSION['code']);
     //引入注册检查过滤的函数库
@@ -51,7 +54,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'modify'){
     if(_affect_rows() != 1) {
         _closeDB();
         _session_destroy();
-        _location("修改失败!", 'member.php');
+        _location("没有任何改动!", 'member.php');
     } else {
         _closeDB();
         _session_destroy();
@@ -81,12 +84,12 @@ if(!isset($_COOKIE['username'])){
             $_html['sex_html'] = '<input type="radio" name="sex" value="男" >男'.'<input type="radio" name="sex" value="女"checked="checked">女';
         }
         $_face_no = substr($_html['face'],6,2);
-        $_html['face_html'] = '<select name="face">';
+        $_html['face_html'] = '<select name="face" autocomplete="off">';
         foreach (range(1, 64) as $number){
             if(intval($_face_no) == $number){
-                $_html['face_html'] .= '<option value="face/'.($number<10 ? '0'.$number:$number).'.gif selected="selected">face/'.($number<10?'0'.$number:$number).'.gif</option>';
+                $_html['face_html'] .= '<option value="face/m'.($number<10 ? '0'.$number:$number).'.gif selected="selected">face/m'.($number<10?'0'.$number:$number).'.gif</option>';
             }
-            $_html['face_html'] .= '<option value="face/'.($number<10 ? '0'.$number:$number).'.gif">face/'.($number<10?'0'.$number:$number).'.gif</option>';
+            $_html['face_html'] .= '<option value="face/m'.($number<10 ? '0'.$number:$number).'.gif">face/m'.($number<10?'0'.$number:$number).'.gif</option>';
         }
         $_html['face_html'] .= '</select>';
     } else {
