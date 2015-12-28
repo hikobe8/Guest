@@ -56,8 +56,8 @@ function _setNames(){
  * @param string $sql sql语句
  * @return resource $result 执行的结果或者空
  */
-function _query($sql){
-    if(!$result = mysql_query($sql)){
+function _query($_sql){
+    if(!$result = mysql_query($_sql)){
         exit("sql语句执行错误!".mysql_error());
     } 
     return $result;   
@@ -69,8 +69,8 @@ function _query($sql){
  * @param string $sql sql 语句
  * @return array 当前结果集的一行数据，已列名为下标
  */
-function _fetch_array($sql){
-    return mysql_fetch_array(_query($sql),MYSQL_ASSOC);
+function _fetch_array($_sql){
+    return mysql_fetch_array(_query($_sql),MYSQL_ASSOC);
 }
 
 /**
@@ -109,19 +109,6 @@ function _affect_rows(){
 function _free_result($_result) {
     mysql_free_result($_result);
 }
-
-/**
- * _check_cookie_uniqid 用于验证本地存储的uniqid
- * @access public
- * @param unknown $_native_uniqid 本地uniqid
- * @param unknown $_server_uniqid 服务器数据库的uniqid
- */
-function _check_cookie_uniqid($_native_uniqid, $_server_uniqid) {
-    if($_native_uniqid != $_server_uniqid){
-        _alert_back("uniqid 错误");
-    }
-}
-
 
 /**
  * _updateLoginInfo 登录成功保存用户的最后登录时间,ip,以及登陆次数加1

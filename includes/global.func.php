@@ -12,14 +12,20 @@
     /**
      * _mysql_string 返回一个mysql的转义字符串 提高写入数据库的安全性
      * @access public 
-     * @param string $str 需要转义的字符串
-     * @return string 转义后的字符串
+     * @param string $_string 需要转义的字符串或字符串数组
+     * @return string 转义后的字符串或数组
      */
-    function _mysql_string($str) {
+    function _mysql_string($_string) {
         if(!GPC) {
-            return mysql_real_escape_string($str);
+            if(is_array($_string)){
+                foreach ($_string as $_key => $_value) {
+                    $_string[$_key] = _mysql_string($_value);
+                }
+            } else {
+                $_string = mysql_escape_string($_string);
+            }
         }
-        return $str;
+        return $_string;
     }
     
     /**
@@ -58,11 +64,20 @@
 		return $time[1] + $time[0];
 	}
 	/**
-	 * 调用js弹出提示框
+	 * _alert_back调用js弹出提示框
 	 * @param string $info 提示信息
 	 */
 	function _alert_back($info){
 	    echo "<script>alert('$info');history.back();</script>";
+	    exit();
+	}
+	
+	/**
+	 * _alert_close调用js提示并关闭当前窗口
+	 * @param string $info 提示信息
+	 */
+	function _alert_close($info){
+	    echo "<script>alert('$info');window.close();</script>";
 	    exit();
 	}
 	
@@ -234,5 +249,21 @@
 	        $_string = htmlspecialchars($_string);
 	    }
 	    return $_string;
+	}
+	
+	/**
+	 * _check_cookie_uniqid 用于验证本地存储的uniqid
+	 *
+	 * @access public
+	 * @param unknown $_native_uniqid
+	 *            本地uniqid
+	 * @param unknown $_server_uniqid
+	 *            服务器数据库的uniqid
+	 */
+	function _check_cookie_uniqid($_native_uniqid, $_server_uniqid)
+	{
+	    if ($_native_uniqid != $_server_uniqid) {
+	        _alert_back("uniqid 错误，非法登录!");
+	    }
 	}
 ?>

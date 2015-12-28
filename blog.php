@@ -22,8 +22,7 @@ require dirname ( __FILE__ ) . '/includes/common.inc.php';
 <title>多用户留言系统--博友</title>
 <?php require ROOT_PATH.'includes/title.inc.php';
 ?> 
-<script type="text/javascript" src="js/code.js"></script>
-<script type="text/javascript" src="js/register.js"></script>
+<script type="text/javascript" src="js/blog.js"></script>
 </head>
 <body>
 <?php
@@ -48,7 +47,7 @@ $_result = _query($_sql);
 <dl>
 <dd class='user'><?php echo $_user['username'].'('.$_user['sex'].')'?></dd>
 <dt><img src="<?php echo $_user['face']?>"/></dt>
-<dd class='message'>发消息</dd>
+<dd class='message'><a href="javascript:;" name="message" title="<?php echo $_user['id']?>">发消息</a></dd>
 <dd class='friend'>加为好友</dd>
 <dd class='guest'>写留言</dd>
 <dd class='flower'>给<?php echo $_user['sex']=='男'?'他':'她'?>送花</dd>

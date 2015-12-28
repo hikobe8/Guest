@@ -13,7 +13,7 @@ if(($_GET['action'] == 'register')){
     //检查验证码
     _checkcode($_POST['code'],$_SESSION['code']);
     //引入注册检查过滤的函数库
-    include ROOT_PATH.'includes/register.func.php';
+    include ROOT_PATH.'includes/check.func.php';
     //用一个数组保存表单提交个数据
      $clean = array();
     //生成一个激活id

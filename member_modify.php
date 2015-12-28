@@ -22,7 +22,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'modify'){
     //检查验证码
     _checkcode($_POST['code'],$_SESSION['code']);
     //引入注册检查过滤的函数库
-    include ROOT_PATH.'includes/register.func.php';
+    include ROOT_PATH.'includes/check.func.php';
     //用一个数组保存表单提交个数据
     $clean = array();
     $clean['password'] = _check_password_modify($_POST['password'], 6);
