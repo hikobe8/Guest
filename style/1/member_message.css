@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+#member div.main div.member_message table
+{
+	width: 90%;
+	margin:10px auto;
+	background: #ccc;
+}
+#member div.main div.member_message table th{
+	height:25px;
+	line-height:25px;
+	background: #fff;
+}
+#member div.main div.member_message table td{ 
+	height:25px;
+	line-height:25px;
+	background: #fff;
+}
+#member div.main div.member_message table td a{
+	text-decoration: none;
+	color: #333;
+}
+#member div.main div.member_message table td a:HOVER {
+	text-decoration: underline;
+}

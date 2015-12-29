@@ -54,10 +54,10 @@ $_result = _query($_sql);
 </dl>
 <?php 
    }
-   _free_result($_result);
 ?>
 <?php 
-    _paging(2);
+   _free_result($_result);
+   _paging(2);
 ?>
 </div>
 <?php
