@@ -210,7 +210,11 @@
 	        echo '<div id="page_num">';
 	        echo '<ul>';
 	            for ($_i = 1; $_i <= $_page_count; $_i ++){
-	            echo '<li><a href="'.SCRIPT.'.php?page='.$_i.'">'.$_i.'</a></li>';
+	                if($_i == $_page_num){
+	                   echo '<li><a class="selected" href="'.SCRIPT.'.php?page='.$_i.'">'.$_i.'</a></li>';
+	                } else {
+	                   echo '<li><a href="'.SCRIPT.'.php?page='.$_i.'">'.$_i.'</a></li>';
+	                }
 	        }
 	        echo '</ul>';
 	        echo '</div>';

@@ -13,6 +13,7 @@
 #member div.main div.member_message table td{ 
 	height:25px;
 	line-height:25px;
+	text-align:center;
 	background: #fff;
 }
 #member div.main div.member_message table td a{

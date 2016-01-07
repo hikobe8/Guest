@@ -79,7 +79,7 @@ h2{
 	text-align:center;
 	text-decoration:none;
 }
-#page_num ul li a:hover,#page_num ul li a.selected {
+#page_num ul li a.selected,#page_num ul li a:hover {
 	background:#666;
 	font-weight:bold;
 	color:#fff;

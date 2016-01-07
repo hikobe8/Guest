@@ -68,7 +68,7 @@ require ROOT_PATH . "includes/header.inc.php";
     <div class='main'>
             <dl>
                 <dd>发 信 人：<?php echo $_html['fromuser']?></dd>
-                <dd>短信内容: <?php echo $_html['content']?></dd>
+                <dd>短信内容: <strong><?php echo $_html['content']?></strong></dd>
                 <dd>发送时间: <?php echo $_html['date']?></dd>
                 <dd class="button"><input type="button"  value="删除" id="delete" name="<?php echo $_html['id']?>"/><input type="button" value="返回列表" id="back"/></dd>
             </dl>
