@@ -41,8 +41,9 @@ $_sql = "SELECT
                 tg_id,
                 tg_fromuser,
                 tg_content,
-                tg_date
-                FROM .
+                tg_date,
+                tg_state
+                FROM 
                 tg_message
           WHERE
                 tg_touser = '{$_COOKIE['username']}'
@@ -69,7 +70,7 @@ require ROOT_PATH . "includes/header.inc.php";
         <div class="member_message">
         <form action="?action=delete" method="post">
         <table>
-        <tr><th>发信人</th><th>短信内容</th><th>发信时间</th><th>勾选</th></tr>
+        <tr><th>发信人</th><th>短信内容</th><th>发信时间</th><th>状态</th><th>勾选</th></tr>
         <?php 
         while (!!$_row =_fetch_array_list($_result)) {
             $_message = array();
@@ -77,13 +78,14 @@ require ROOT_PATH . "includes/header.inc.php";
             $_message['fromuser'] = $_row['tg_fromuser'];
             $_message['content'] = $_row['tg_content'];
             $_message['date'] = $_row['tg_date'];
+            $_message['state'] = $_row['tg_state'];
             $_message = _html($_message);
         ?>
-        <tr><td><?php echo $_message['fromuser']?></td><td><a href="member_message_datail.php?id=<?php echo $_message['id']?>"><strong><?php echo $_message['content']?></strong></a></td><td><?php echo $_message['date']?></td><td><input type="checkbox" name="ids[]" value="<?php echo $_message['id']?>"/></td></tr>
+        <tr><td><?php echo $_message['fromuser']?></td><td><a href="member_message_datail.php?id=<?php echo $_message['id']?>"><strong><?php echo $_message['content']?></strong></a></td><td><?php echo $_message['date']?></td><td><?php echo empty($_message['state'])? '未读': '已读';?></td><td><input type="checkbox" name="ids[]" value="<?php echo $_message['id']?>"/></td></tr>
         <?php 
             }
         ?>
-        <tr><td colspan="4"><label for="all">全选 <input type="checkbox" name="chkall" id="all" /></label> <input type="submit" value="删除已选项" /></td></tr>
+        <tr><td colspan="5"><label for="all">全选 <input type="checkbox" name="chkall" id="all" /></label> <input type="submit" value="删除已选项" /></td></tr>
         </table>       
         </form>
         <?php 

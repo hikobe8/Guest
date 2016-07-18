@@ -41,7 +41,16 @@ if(isset($_GET['action']) && isset($_GET['id'])) {
     //删除
 }
 //根据id获取短信内容
-$_sql = "SELECT tg_id, tg_fromuser,tg_content,tg_date FROM tg_message WHERE tg_id='{$_GET['id']}'";
+$_sql = "SELECT 
+				tg_id, 
+				tg_fromuser,
+				tg_content,
+				tg_date,
+				tg_state 
+			FROM 
+				tg_message
+			WHERE 
+				tg_id='{$_GET['id']}'";
 if (!!$_row = _fetch_array($_sql)) {
     $_html = array();
     $_html['id'] = $_row['tg_id'];
@@ -49,6 +58,11 @@ if (!!$_row = _fetch_array($_sql)) {
     $_html['content'] = $_row['tg_content'];
     $_html['date'] = $_row['tg_date'];
     $_html = _html($_html);
+    if (empty($_row['tg_state'])) {
+    	//标记消息已读
+    	$_sql = "UPDATE tg_message SET tg_state = 1 WHERE tg_id='{$_GET['id']}'";
+    	_query($_sql);
+    }
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
