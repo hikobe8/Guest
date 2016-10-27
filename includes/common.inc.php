@@ -37,7 +37,7 @@ define('START_TIME', _runtime());
 //定义数据库连接使用的常量
 define('_DB_HOST', 'localhost');
 define('_DB_USER', 'root');
-define('_DB_PWD', 'root');
+define('_DB_PWD', 'userroot');
 define('_DB_NAME', 'testguest');
 
 _connectDB();
